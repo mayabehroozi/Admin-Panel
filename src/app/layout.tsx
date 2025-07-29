@@ -1,51 +1,19 @@
-
-// 'use client';
-
-// import { ReactNode, useState } from 'react';
-
-// import FixedSidebar from '../components/Sidebar'
-// import Header from '../components/Header';
-// import { Box } from '@mui/material';
-
-// const drawerWidth = 240;
-
-// export default function AdminLayout({ children }: { children: ReactNode }) {
-//   const [headerHeight, setHeaderHeight] = useState(64); // مقدار پیش‌فرض
-
-//   return (
-//     <Box >
-    
-//       <Header/>
-   
-//       <FixedSidebar/>
-
-//       <Box
-//         component="main"
-//         sx={{
-//           marginTop: `${headerHeight}px`,
-//           marginLeft: `${drawerWidth}px`,
-//           padding: 2,
-//         }}
-//       >
-//         {children}
-//       </Box>
-//     </Box>
-//   );
-// }
-// //////////////
 'use client';
 
 import { ReactNode, useState } from 'react';
 import FixedSidebar from '../components/Sidebar';
 import Header from '../components/Header';
-import { Box } from '@mui/material';
-import { ThemeModeProvider } from '../app/context/theme-context'; // مسیر رو درست بذار
+import { Box, useMediaQuery } from '@mui/material';
+import { ThemeModeProvider } from '../app/context/theme-context';
 import CssBaseline from '@mui/material/CssBaseline';
+import { useTheme } from '@mui/material/styles';
 
-const drawerWidth = 240;
+const drawerWidth = 250;
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
-  const [headerHeight, setHeaderHeight] = useState(64); // مقدار پیش‌فرض
+  const [headerHeight, setHeaderHeight] = useState(64);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <ThemeModeProvider>
@@ -54,11 +22,12 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       <Box>
         <Header />
         <FixedSidebar />
+
         <Box
           component="main"
           sx={{
             marginTop: `${headerHeight}px`,
-            marginLeft: `${drawerWidth}px`,
+            marginLeft: isMobile ? 0 : `${drawerWidth}px`, // ✅ فقط وقتی دسکتاپه
             padding: 2,
           }}
         >
