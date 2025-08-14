@@ -28,8 +28,9 @@ export default function LoginPage() {
     e.preventDefault()
 
     if (email === 'mahnazbehroozi9@gmail.com' && password === '1234') {
-      // اطلاعات درست بود → انتقال به داشبورد
-      router.push('/dashboard')
+      // ذخیره وضعیت لاگین در localStorage
+      sessionStorage.setItem('isLoggedIn', 'true')
+      router.push('/dashboard') // یا هر صفحه ای که داشبوردت هست
     } else {
       setError('Invalid email or password')
     }
@@ -39,7 +40,7 @@ export default function LoginPage() {
     <Box
       sx={{
         minHeight: '100vh',
-         bgcolor: 'background.default',
+        bgcolor: 'background.default',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
