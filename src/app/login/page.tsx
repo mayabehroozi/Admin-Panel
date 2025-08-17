@@ -30,7 +30,7 @@ export default function LoginPage() {
     if (email === 'mahnazbehroozi9@gmail.com' && password === '1234') {
       // ذخیره وضعیت لاگین در localStorage
       sessionStorage.setItem('isLoggedIn', 'true')
-      router.push('/dashboard') // یا هر صفحه ای که داشبوردت هست
+     window.location.href = '/dashboard';
     } else {
       setError('Invalid email or password')
     }
